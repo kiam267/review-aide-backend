@@ -4,7 +4,7 @@ import swagger from './swagger/swagger.js';
 import express from 'express';
 import cors from 'cors';
 
-import authRouter from './routes/auth-router.js';
+// import authRouter from './routes/auth-router.js';
 import { errorMessage } from './utils/message.js';
 
 // const userRouter = require('./routes/useres-router');
@@ -24,6 +24,12 @@ app.use(function (err, req, res, next) {
   return errorMessage(res, 500, 'Internal Server Error');
 });
 
+app.get('/', function (req, res) {
+  res.json({
+    message: 'Review now Live',
+  });
+});
+
 // swagger setup
 swagger(app);
 
@@ -31,14 +37,13 @@ swagger(app);
 // app.use('/api/uploads', express.static('uploads'));
 // app.use('/api/photos', express.static('photos'));
 
-app.use('/api/v2/auth', authRouter);
+// app.use('/api/v2/auth', authRouter);
 // app.use('/api/users', userRouter);
 // app.use('/api/client', clientRouter);
 // app.use('/api/review', reviewRouter);
 // app.use('/api/customer', customerSupportRouter);
 // app.use('/api/marketing', marketingRouter);
 // app.use('/api/shortcut', shortcutRouter);
-
 
 app.listen(port, () => {
   console.log(`App listening on ${port}`);
