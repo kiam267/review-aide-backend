@@ -1,30 +1,36 @@
 // controllers/auth-controller.js
-import { PrismaClient } from '@prisma/client';
-import {
-  errorMessage,
-  successMessage,
-} from '../utils/message.js';
+// import { PrismaClient } from '@prisma/client';
+// import {
+//   errorMessage,
+//   successMessage,
+// } from '../utils/message.js';
 // import {
 //   password_hash,
 //   token_generator,
 //   comparePassword,
 // } from '../utils/utils.js';
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 // Register
 export const register = async (req, res) => {
   const { name, email, password, isAdmin } = req.body;
 
-  const existing = await prisma.user.findUnique({
-    where: { email },
-  });
-  if (existing) {
-    return errorMessage(res, 400, 'Email already exists');
-  }
+  // const existing = await prisma.user.findUnique({
+  //   where: { email },
+  // });
+  // if (existing) {
+  //   return errorMessage(res, 400, 'Email already exists');
+  // }
 
   res.json({
     msg: 'Register work ',
+    data: {
+      neme,
+      email,
+      password,
+      isAdmin,
+    },
   });
   // const hashPassword = await password_hash(password);
 
@@ -52,15 +58,19 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
-  const admin = await prisma.user.findUnique({
-    where: { email },
-  });
+  // const admin = await prisma.user.findUnique({
+  //   where: { email },
+  // });
 
-  if (!admin) {
-    return errorMessage(res, 400, 'Email does not exist');
-  }
+  // if (!admin) {
+  //   return errorMessage(res, 400, 'Email does not exist');
+  // }
   res.json({
     msg: 'Login worked',
+    data: {
+      email,
+      password,
+    },
   });
   // const validPassword = await comparePassword(
   //   password,
