@@ -29,9 +29,9 @@ const setupSwagger = app => {
   const swaggerUiPath = swaggerUiDist.getAbsoluteFSPath();
   app.use(
     '/api/v2/docs',
-    // swagger.serve,
-    // swagger.setup(swaggerSpec),
-    express.static(swaggerUiPath)
+    swagger.serve,
+    swagger.setup(swaggerSpec)
+    // express.static(swaggerUiPath)
   );
 };
 
