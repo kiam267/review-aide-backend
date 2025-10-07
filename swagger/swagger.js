@@ -4,7 +4,7 @@ import swaggerUiDist from 'swagger-ui-dist';
 import swagger from 'swagger-ui-express';
 
 const CSS_URL =
-  'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.4.0/swagger-ui.js';
+  'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.3.0/swagger-ui.min.css';
 
 const options = {
   definition: {
