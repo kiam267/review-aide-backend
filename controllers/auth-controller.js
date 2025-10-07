@@ -8,7 +8,6 @@ import {
   password_hash,
   token_generator,
   comparePassword,
-  verifyToken,
 } from '../utils/utils.js';
 
 const prisma = new PrismaClient();
@@ -90,105 +89,105 @@ export const login = async (req, res) => {
 };
 
 // Get all users (example)
-export const getAll = async (req, res) => {
-  console.log('ok');
-  const { token } = req.headers;
-  const tokenVerify = verifyToken(token);
-  console.log(req.headers, 'pok');
+// export const getAll = async (req, res) => {
+//   console.log('ok');
+//   const { token } = req.headers;
+//   const tokenVerify = verifyToken(token);
+//   console.log(req.headers, 'pok');
 
-  try {
-    const users = await prisma.user.findMany();
-    res.json({ msg: 'Everything ok!', users });
-  } catch (err) {
-    res.json(
-      errorMessage('error', 'Could not fetch users')
-    );
-  }
-};
+//   try {
+//     const users = await prisma.user.findMany();
+//     res.json({ msg: 'Everything ok!', users });
+//   } catch (err) {
+//     res.json(
+//       errorMessage('error', 'Could not fetch users')
+//     );
+//   }
+// };
 
 // Edit user
-export const editUser = async (req, res) => {
-  const token = req.headers.token;
-  const {
-    username,
-    phone,
-    email,
-    company_name,
-    facebook_link,
-    google_link,
-    temporaray_lock,
-    userEmail,
-  } = req.body;
+// export const editUser = async (req, res) => {
+//   const token = req.headers.token;
+//   const {
+//     username,
+//     phone,
+//     email,
+//     company_name,
+//     facebook_link,
+//     google_link,
+//     temporaray_lock,
+//     userEmail,
+//   } = req.body;
 
-  try {
-    const isVerified = verifyToken(token);
-    if (!Boolean(isVerified.decoded.isAdmin)) {
-      return res.json(
-        errorMessage(
-          'error',
-          'You are not allowed to edit this user'
-        )
-      );
-    }
+//   try {
+//     const isVerified = verifyToken(token);
+//     if (!Boolean(isVerified.decoded.isAdmin)) {
+//       return res.json(
+//         errorMessage(
+//           'error',
+//           'You are not allowed to edit this user'
+//         )
+//       );
+//     }
 
-    const updatedUser = await prisma.user.update({
-      where: { email: userEmail },
-      data: {
-        username,
-        phone,
-        email,
-        company_name,
-        facebook_link,
-        google_link,
-        temporaray_lock,
-      },
-    });
+//     const updatedUser = await prisma.user.update({
+//       where: { email: userEmail },
+//       data: {
+//         username,
+//         phone,
+//         email,
+//         company_name,
+//         facebook_link,
+//         google_link,
+//         temporaray_lock,
+//       },
+//     });
 
-    const users = await prisma.user.findMany();
+//     const users = await prisma.user.findMany();
 
-    return res.json(
-      errorMessage('success', 'Update successful', users)
-    );
-  } catch (error) {
-    console.error(error);
-    return res.json(
-      errorMessage('error', 'Data not updated')
-    );
-  }
-};
+//     return res.json(
+//       errorMessage('success', 'Update successful', users)
+//     );
+//   } catch (error) {
+//     console.error(error);
+//     return res.json(
+//       errorMessage('error', 'Data not updated')
+//     );
+//   }
+// };
 
 // Delete user
-export const userDelete = async (req, res) => {
-  const { email } = req.body;
-  const token = req.headers.token;
+// export const userDelete = async (req, res) => {
+//   const { email } = req.body;
+//   const token = req.headers.token;
 
-  try {
-    const isVerified = verifyToken(token);
-    if (!Boolean(isVerified.decoded.isAdmin)) {
-      return res.json(
-        errorMessage(
-          'error',
-          'You are not allowed to delete this user'
-        )
-      );
-    }
+//   try {
+//     const isVerified = verifyToken(token);
+//     if (!Boolean(isVerified.decoded.isAdmin)) {
+//       return res.json(
+//         errorMessage(
+//           'error',
+//           'You are not allowed to delete this user'
+//         )
+//       );
+//     }
 
-    // Delete related client visitor data first
-    await prisma.clientVisitor.deleteMany({
-      where: { user_email: email },
-    });
+//     // Delete related client visitor data first
+//     await prisma.clientVisitor.deleteMany({
+//       where: { user_email: email },
+//     });
 
-    // Delete the user
-    await prisma.user.delete({ where: { email } });
+//     // Delete the user
+//     await prisma.user.delete({ where: { email } });
 
-    const users = await prisma.user.findMany();
-    return res.json(
-      errorMessage('success', 'User deleted', users)
-    );
-  } catch (error) {
-    console.error(error);
-    return res.json(
-      errorMessage('error', 'Data not deleted')
-    );
-  }
-};
+//     const users = await prisma.user.findMany();
+//     return res.json(
+//       errorMessage('success', 'User deleted', users)
+//     );
+//   } catch (error) {
+//     console.error(error);
+//     return res.json(
+//       errorMessage('error', 'Data not deleted')
+//     );
+//   }
+// };

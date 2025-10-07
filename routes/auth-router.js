@@ -1,8 +1,8 @@
 import express from 'express';
-// import {
-//   register,
-//   login,
-// } from '../controllers/auth-controller.js';
+import {
+  register,
+  login,
+} from '../controllers/auth-controller.js';
 import validation from '../validations/validation.js';
 import {
   registerSchema,
@@ -49,12 +49,9 @@ const router = express.Router();
  *         description: Internal server error
  */
 
-// validation(registerSchema), register
 router
   .route('/register')
-  .get(validation(registerSchema), function (req, res) {
-    res.json({ message: 'Register endpoint is working' });
-  });
+  .post(validation(registerSchema), register);
 
 /**
  * @swagger
@@ -88,12 +85,6 @@ router
  *         description: Internal server error
  */
 
-router.post(
-  '/login',
-  validation(loginSchema),
-  function (req, res) {
-    res.json({ message: 'Login endpoint is working' });
-  }
-);
+router.post('/login', validation(loginSchema), login);
 
 export default router;
