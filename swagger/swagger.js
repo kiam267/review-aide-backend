@@ -4,6 +4,9 @@ import express from 'express';
 import swaggerUiDist from 'swagger-ui-dist';
 import swagger from 'swagger-ui-express';
 
+const CSS_URL =
+  'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css';
+
 const options = {
   definition: {
     openapi: '3.0.0',
@@ -30,7 +33,9 @@ const setupSwagger = app => {
   app.use(
     '/api/v2/docs',
     swagger.serve,
-    swagger.setup(swaggerSpec)
+    swagger.setup(swaggerSpec, {
+      customCssUrl: CSS_URL,
+    })
     // express.static(swaggerUiPath)
   );
 };
