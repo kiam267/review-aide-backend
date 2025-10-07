@@ -1,13 +1,13 @@
 import express from 'express';
-import {
-  register,
-  login,
-} from '../controllers/auth-controller.js';
-import validation from '../validations/validation.js';
-import {
-  registerSchema,
-  loginSchema,
-} from '../schema/auth-schema.js';
+// import {
+//   register,
+//   login,
+// } from '../controllers/auth-controller.js';
+// import validation from '../validations/validation.js';
+// import {
+//   registerSchema,
+//   loginSchema,
+// } from '../schema/auth-schema.js';
 
 const router = express.Router();
 
