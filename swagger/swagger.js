@@ -1,8 +1,9 @@
-import 'dotenv/config';
-import swagger from 'swagger-ui-express';
+// swagger.js
 import swaggerJSDoc from 'swagger-jsdoc';
+import express from 'express';
+import swaggerUiDist from 'swagger-ui-dist';
+import swagger from 'swagger-ui-express';
 
-// Swagger configuration
 const options = {
   definition: {
     openapi: '3.0.0',
@@ -15,21 +16,22 @@ const options = {
     servers: [
       {
         url: `${process.env.BASE_URL}/api/v2`,
-        description: 'Local server',
+        description: 'Server URL',
       },
     ],
   },
-  // Path to the API docs (your route files)
   apis: ['./routes/*.js', './controllers/*.js'],
 };
+
 const swaggerSpec = swaggerJSDoc(options);
 
-// Function to setup Swagger in your app
 const setupSwagger = app => {
+  const swaggerUiPath = swaggerUiDist.getAbsoluteFSPath();
   app.use(
     '/api/v2/docs',
-    swagger.serve,
-    swagger.setup(swaggerSpec)
+    // swagger.serve,
+    // swagger.setup(swaggerSpec),
+    express.static(swaggerUiPath)
   );
 };
 

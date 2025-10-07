@@ -11,6 +11,9 @@
     "db:studio": "prisma studio",
     "swagger": "node ./swagger.js"
   },
+   "scarfSettings": {
+    "enabled": false
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -30,6 +33,7 @@
     "p-queue": "^8.0.1",
     "swagger-autogen": "^2.23.7",
     "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-dist": "^5.29.3",
     "swagger-ui-express": "^5.0.1",
     "uniqid": "^5.4.0",
     "zod": "^3.22.4"
