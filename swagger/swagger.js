@@ -14,7 +14,7 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:8080/api/v2',
+        url: `${process.env.BASE_URL}/api/v2`,
         description: 'Local server',
       },
     ],
