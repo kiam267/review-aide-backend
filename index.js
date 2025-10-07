@@ -15,7 +15,7 @@ import { errorMessage } from './utils/message.js';
 // const shortcutRouter = require('./routes/shortcut-router');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port =  3000;
 
 app.use(cors());
 app.use(express.json());
@@ -24,7 +24,7 @@ app.use(function (err, req, res, next) {
   return errorMessage(res, 500, 'Internal Server Error');
 });
 
-app.get('/', function (req, res) {
+app.get('/api/v2/test', function (req, res) {
   res.json({
     message: 'Review now Live',
   });
@@ -37,7 +37,7 @@ swagger(app);
 // app.use('/api/uploads', express.static('uploads'));
 // app.use('/api/photos', express.static('photos'));
 
-app.use('/api/v2/auth', authRouter);
+// app.use('/api/v2/auth', authRouter);
 // app.use('/api/users', userRouter);
 // app.use('/api/client', clientRouter);
 // app.use('/api/review', reviewRouter);
