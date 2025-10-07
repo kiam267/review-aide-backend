@@ -4,11 +4,11 @@ import {
   errorMessage,
   successMessage,
 } from '../utils/message.js';
-import {
-  password_hash,
-  token_generator,
-  comparePassword,
-} from '../utils/utils.js';
+// import {
+//   password_hash,
+//   token_generator,
+//   comparePassword,
+// } from '../utils/utils.js';
 
 const prisma = new PrismaClient();
 
@@ -23,26 +23,29 @@ export const register = async (req, res) => {
     return errorMessage(res, 400, 'Email already exists');
   }
 
-  const hashPassword = await password_hash(password);
-
-  const newAdmin = await prisma.user.create({
-    data: {
-      name,
-      email,
-      password: hashPassword,
-      isAdmin: Boolean(isAdmin),
-    },
+  res.json({
+    msg: 'Register work ',
   });
-  const response = {
-    isAdmin: newAdmin.isAdmin,
-    email: newAdmin.email,
-  };
-  return successMessage(
-    res,
-    200,
-    'Register successfully',
-    response
-  );
+  // const hashPassword = await password_hash(password);
+
+  // const newAdmin = await prisma.user.create({
+  //   data: {
+  //     name,
+  //     email,
+  //     password: hashPassword,
+  //     isAdmin: Boolean(isAdmin),
+  //   },
+  // });
+  // const response = {
+  //   isAdmin: newAdmin.isAdmin,
+  //   email: newAdmin.email,
+  // };
+  // return successMessage(
+  //   res,
+  //   200,
+  //   'Register successfully',
+  //   response
+  // );
 };
 
 // Login
@@ -56,36 +59,38 @@ export const login = async (req, res) => {
   if (!admin) {
     return errorMessage(res, 400, 'Email does not exist');
   }
-
-  const validPassword = await comparePassword(
-    password,
-    admin.password
-  );
-  if (!validPassword) {
-    return errorMessage(
-      res,
-      400,
-      'Password mismatch. Please check your password.'
-    );
-  }
-
-  const token = token_generator({
-    username: admin.username,
-    email: admin.email,
-    isAdmin: admin.isAdmin,
+  res.json({
+    msg: 'Login worked',
   });
+  // const validPassword = await comparePassword(
+  //   password,
+  //   admin.password
+  // );
+  // if (!validPassword) {
+  //   return errorMessage(
+  //     res,
+  //     400,
+  //     'Password mismatch. Please check your password.'
+  //   );
+  // }
 
-  const response = {
-    token,
-    isAdmin: admin.isAdmin,
-    email: admin.email,
-  };
-  return successMessage(
-    res,
-    200,
-    'Login successful',
-    response
-  );
+  // const token = token_generator({
+  //   username: admin.username,
+  //   email: admin.email,
+  //   isAdmin: admin.isAdmin,
+  // });
+
+  // const response = {
+  //   token,
+  //   isAdmin: admin.isAdmin,
+  //   email: admin.email,
+  // };
+  // return successMessage(
+  //   res,
+  //   200,
+  //   'Login successful',
+  //   response
+  // );
 };
 
 // Get all users (example)
