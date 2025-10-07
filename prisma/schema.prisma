@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String        @id @default(uuid())
+  name        String
+  phone       String        @unique
+  email       String        @unique
+  password    String
+  isAdmin     Boolean       @default(false)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
+  UserProfile UserProfile[]
+}
+
+model UserProfile {
+  id           String   @id @default(uuid())
+  companyName  String
+  userId       String
+  googleId     String?  @unique
+  facebookId   String?  @unique
+  customeSms   String?  @db.VarChar(500)
+  customeEmail String?  @db.VarChar(500)
+  token        String?  @db.VarChar(500)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now())
+  user User @relation(fields: [userId], references: [id])
+}
+
+//  npx prisma migrate dev --name user-table
