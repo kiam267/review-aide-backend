@@ -1,4 +1,4 @@
-import 'dotenv';
+import 'dotenv/config';
 import swagger from './swagger/swagger.js';
 
 import express from 'express';
