@@ -1,5 +1,5 @@
 // controllers/auth-controller.js
-// import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 // import {
 //   errorMessage,
 //   successMessage,
@@ -10,7 +10,7 @@
 //   comparePassword,
 // } from '../utils/utils.js';
 
-// const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
 // Register
 export const register = async (req, res) => {
