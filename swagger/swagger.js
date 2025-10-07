@@ -1,11 +1,10 @@
 // swagger.js
 import swaggerJSDoc from 'swagger-jsdoc';
-import express from 'express';
 import swaggerUiDist from 'swagger-ui-dist';
 import swagger from 'swagger-ui-express';
 
 const CSS_URL =
-  'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.29.1/swagger-ui.js';
+  'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.4.0/swagger-ui.js';
 
 const options = {
   definition: {
