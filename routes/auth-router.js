@@ -49,9 +49,10 @@ const router = express.Router();
  *         description: Internal server error
  */
 
-router
-  .route('/register')
-  .post(validation(registerSchema), register);
+// validation(registerSchema), register
+router.route('/register').get(function (req, res) {
+  res.json({ message: 'Register endpoint is working' });
+});
 
 /**
  * @swagger
@@ -85,6 +86,6 @@ router
  *         description: Internal server error
  */
 
-router.post('/login', validation(loginSchema), login);
+// router.post('/login', validation(loginSchema), login);
 
 export default router;

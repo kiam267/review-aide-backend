@@ -4,7 +4,7 @@ import swagger from './swagger/swagger.js';
 import express from 'express';
 import cors from 'cors';
 
-// import authRouter from './routes/auth-router.js';
+import authRouter from './routes/auth-router.js';
 import { errorMessage } from './utils/message.js';
 
 // const userRouter = require('./routes/useres-router');
@@ -37,7 +37,7 @@ swagger(app);
 // app.use('/api/uploads', express.static('uploads'));
 // app.use('/api/photos', express.static('photos'));
 
-// app.use('/api/v2/auth', authRouter);
+app.use('/api/v2/auth', authRouter);
 // app.use('/api/users', userRouter);
 // app.use('/api/client', clientRouter);
 // app.use('/api/review', reviewRouter);
