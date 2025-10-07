@@ -1,6 +1,5 @@
 // swagger.js
 import swaggerJSDoc from 'swagger-jsdoc';
-import swaggerUiDist from 'swagger-ui-dist';
 import swagger from 'swagger-ui-express';
 
 const CSS_URL =
@@ -28,7 +27,6 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 const setupSwagger = app => {
-  const swaggerUiPath = swaggerUiDist.getAbsoluteFSPath();
   app.use(
     '/api/v2/docs',
     swagger.serve,

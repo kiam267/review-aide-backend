@@ -3,11 +3,11 @@ import express from 'express';
 //   register,
 //   login,
 // } from '../controllers/auth-controller.js';
-// import validation from '../validations/validation.js';
-// import {
-//   registerSchema,
-//   loginSchema,
-// } from '../schema/auth-schema.js';
+import validation from '../validations/validation.js';
+import {
+  registerSchema,
+  loginSchema,
+} from '../schema/auth-schema.js';
 
 const router = express.Router();
 
@@ -50,9 +50,11 @@ const router = express.Router();
  */
 
 // validation(registerSchema), register
-router.route('/register').get(function (req, res) {
-  res.json({ message: 'Register endpoint is working' });
-});
+router
+  .route('/register')
+  .get(validation(registerSchema), function (req, res) {
+    res.json({ message: 'Register endpoint is working' });
+  });
 
 /**
  * @swagger
@@ -86,6 +88,12 @@ router.route('/register').get(function (req, res) {
  *         description: Internal server error
  */
 
-// router.post('/login', validation(loginSchema), login);
+router.post(
+  '/login',
+  validation(loginSchema),
+  function (req, res) {
+    res.json({ message: 'Login endpoint is working' });
+  }
+);
 
 export default router;
