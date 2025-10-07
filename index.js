@@ -4,7 +4,7 @@ import swagger from './swagger/swagger.js';
 import express from 'express';
 import cors from 'cors';
 
-import authRouter from './routes/auth-router.js';
+// import authRouter from './routes/auth-router.js';
 import { errorMessage } from './utils/message.js';
 
 // const userRouter = require('./routes/useres-router');
