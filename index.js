@@ -15,6 +15,7 @@ import { errorMessage } from './utils/message.js';
 // const shortcutRouter = require('./routes/shortcut-router');
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -25,11 +26,10 @@ app.use(function (err, req, res, next) {
 
 // swagger setup
 swagger(app);
-const port = 3000;
 
 // Serve static files from the 'uploads' directory
-app.use('/api/uploads', express.static('uploads'));
-app.use('/api/photos', express.static('photos'));
+// app.use('/api/uploads', express.static('uploads'));
+// app.use('/api/photos', express.static('photos'));
 
 app.use('/api/v2/auth', authRouter);
 // app.use('/api/users', userRouter);
@@ -39,38 +39,6 @@ app.use('/api/v2/auth', authRouter);
 // app.use('/api/marketing', marketingRouter);
 // app.use('/api/shortcut', shortcutRouter);
 
-// img storage confing
-// Multer configuration
-import multer from 'multer';
-
-let imgconfig = multer.diskStorage({
-  destination: (req, file, callback) => {
-    console.log(file);
-    callback(null, './uploads');
-  },
-  filename: (req, file, callback) => {
-    callback(
-      null,
-      `image-${Date.now()}.${file.originalname}`
-    );
-  },
-});
-
-// img filter
-
-const isImage = (req, file, callback) => {
-  console.log(file);
-  if (file.mimetype.startsWith('image')) {
-    callback(null, true);
-  } else {
-    callback(null, Error('only image is allowd'));
-  }
-};
-
-let upload = multer({
-  storage: imgconfig,
-  fileFilter: isImage,
-});
 
 app.listen(port, () => {
   console.log(`App listening on ${port}`);
