@@ -3,7 +3,7 @@ import swagger from './swagger/swagger.js';
 
 import express from 'express';
 import cors from 'cors';
-
+import morgan from 'morgan';
 import authRouter from './routes/auth-router.js';
 import { errorMessage } from './utils/message.js';
 
@@ -18,6 +18,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors());
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(function (err, req, res, next) {
   console.log(err);

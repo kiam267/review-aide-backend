@@ -1,7 +1,18 @@
 // swagger.js
 import swaggerJSDoc from 'swagger-jsdoc';
-import swagger from 'swagger-ui-express';
+import swaggerUi from 'swagger-ui-express';
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url'; // ✅ should be 'url', not 'URL'
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export const __swaggerDistPath = path.join(
+  __dirname,
+  'node_modules',
+  'swagger-ui-dist'
+);
 
 const CSS_URL =
   'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.3.0/swagger-ui.min.css';
@@ -22,7 +33,7 @@ const options = {
       },
     ],
   },
-  apis: ['./routes/*.js', './controllers/*.js'],
+  apis: ['./routes/*.js', './controllers/*.js'], // paths to your API files
 };
 
 const swaggerSpec = swaggerJSDoc(options);
@@ -30,8 +41,11 @@ const swaggerSpec = swaggerJSDoc(options);
 const setupSwagger = app => {
   app.use(
     '/api/v2/docs',
-    swagger.serve,
-    swagger.setup(swaggerSpec)
+    express.static(__swaggerDistPath, { index: false }),
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerSpec, {
+      customCssUrl: CSS_URL, // ✅ properly include custom CSS
+    })
   );
 };
 
