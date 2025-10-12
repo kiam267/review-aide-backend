@@ -32,7 +32,6 @@ app.get('/api/v2/test', function (req, res) {
 });
 
 // swagger setup
-swagger(app);
 
 // Serve static files from the 'uploads' directory
 // app.use('/api/uploads', express.static('uploads'));
@@ -45,7 +44,7 @@ app.use('/api/v2/auth', authRouter);
 // app.use('/api/customer', customerSupportRouter);
 // app.use('/api/marketing', marketingRouter);
 // app.use('/api/shortcut', shortcutRouter);
-
+swagger(app);
 app.listen(port, () => {
   console.log(`App listening on ${port}`);
 });
